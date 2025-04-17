@@ -1,0 +1,45 @@
+/* сброс */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgba(255, 255, 255, 1);
+}
+
+button,
+p,
+div,
+span,
+ul {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+button {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+ul {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+}
+.container {
+  max-width: 1320px;
+  margin: 0 auto;
+}

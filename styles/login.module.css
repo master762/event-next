@@ -1,0 +1,275 @@
+/* хедер и фон */
+.elements {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 85px;
+  padding: 0 20px;
+}
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  min-height: 661px;
+  background: rgba(255, 190, 190, 0.8);
+  clip-path: polygon(0 0, 100% 0, 70% 100%, 0 68%);
+}
+/* Кнопка в шапке */
+.elements button {
+  border: 1.5px solid #212121;
+  background: transparent;
+  width: 136px;
+  height: 48px;
+  font-size: 12.8px;
+  line-height: 22.5px;
+  letter-spacing: 0.7px;
+  cursor: pointer;
+}
+/* форма */
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 380px;
+  margin: 63px auto 0 auto;
+  padding: 0 20px;
+}
+.title {
+  margin-bottom: 55px;
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+}
+/* Поле ввода с плавающим лейблом */
+.inputGroup {
+  position: relative;
+  width: 100%;
+  margin-bottom: 24px;
+}
+.inputGroup input {
+  width: 100%;
+  height: 68px;
+  padding: 24px 15px 8px 15px;
+  border: 1px solid #e0e0e0;
+  font-size: 16px;
+  background-color: #fff;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.inputGroup input:focus {
+  border-color: #212121;
+}
+.inputGroup label {
+  position: absolute;
+  top: 22px;
+  left: 15px;
+  font-size: 16px;
+  color: #616161;
+  background: white;
+  padding: 0 4px;
+  transition: 0.2s ease;
+  pointer-events: none;
+}
+.inputGroup input:focus + label,
+.inputGroup input:not(:placeholder-shown) + label {
+  top: 6px;
+  font-size: 12px;
+  color: #212121;
+}
+/* политика конфилециальности */
+.policy {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 8px;
+  margin-top: 16px;
+}
+.policy input {
+  width: 22px;
+  height: 22px;
+  appearance: none;
+  border: 2px solid #212121;
+  background: transparent;
+}
+.policy input:checked {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23212121' stroke-width='3' d='M4 12l6 6L20 6'/%3E%3C/svg%3E");
+  background-size: 80%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.policy a {
+  font-size: 10px;
+  line-height: 22.5px;
+  color: #616161;
+  text-decoration: underline;
+}
+/* кнопка регистрации */
+.createAccount {
+  width: 100%;
+  height: 64px;
+  background-color: #212121;
+  margin: 16px 0 19px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.createAccount span {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 28.2px;
+  color: #ffffff;
+}
+/* разделитель */
+.or {
+  font-size: 12px;
+  line-height: 22.5px;
+  color: #000000;
+  margin-bottom: 16.5px;
+}
+/* авторизация чере соц сети */
+.providers {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+.providers button {
+  width: 40px;
+  height: 40px;
+  background-color: #fafafa;
+  border: 1px solid #eeeeee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+/* копирайт */
+.copyright {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 12px;
+  color: #999;
+}
+.error {
+  color: #d32f2f;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+.inputGroup input {
+  transition: all 0.3s ease;
+}
+
+/* Подсветка ошибок в полях */
+.inputError {
+  border-color: #d32f2f;
+  animation: shake 0.5s ease;
+}
+
+/* Анимация для ошибок */
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Анимация появления текста ошибок */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Для кнопки */
+.createAccount:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* При успешной валидации */
+.inputGroup input:not(.inputError):focus {
+  border-color: #4caf50;
+}
+
+.createAccount {
+  transition: background-color 0.3s ease;
+}
+
+.createAccount:hover:enabled {
+  background-color: #333;
+}
+
+.createAccount:disabled {
+  background-color: #e0e0e0;
+}
+
+/* Для кнопки */
+.createAccount:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* При успешной валидации */
+.inputGroup input:not(.inputError):focus {
+  border-color: #4caf50;
+}
+
+.createAccount {
+  transition: background-color 0.3s ease;
+}
+
+.createAccount:hover:enabled {
+  background-color: #333;
+}
+
+.createAccount:disabled {
+  background-color: #e0e0e0;
+}
+
+/* адаптация */
+@media (max-width: 480px) {
+  .elements {
+    flex-direction: column;
+    height: auto;
+    gap: 10px;
+  }
+  .elements button {
+    width: 100%;
+    max-width: 200px;
+  }
+  .form {
+    padding: 0 10px;
+  }
+  .providers {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .createAccount {
+    height: 56px;
+  }
+}
