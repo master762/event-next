@@ -53,7 +53,10 @@ export default function Header() {
         />
         <div className={styles.buttons}>
           <button className={styles.outlined}>Создать мероприятие</button>
-          <button className={styles.filled}>Регистрация</button>
+
+          <Link href="/login">
+            <button className={styles.filled}>Регистрация</button>
+          </Link>
         </div>
       </div>
     </header>

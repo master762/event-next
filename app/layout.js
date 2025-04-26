@@ -8,8 +8,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ru">
       <head>
-        <title>project</title>
-        <link rel="icon" href="/logo.svg" />
+        <title>Eventify</title>
+        <link rel="icon" href="/img/logo.svg" />
       </head>
       <body>
         <main>{children}</main>

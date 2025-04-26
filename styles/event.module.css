@@ -1,0 +1,392 @@
+.navigate {
+  width: 100%;
+  height: 67px;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  margin-bottom: 53px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+.navigate li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  line-height: 130%;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.background {
+  width: 100%;
+  min-height: 835px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+}
+.text {
+  max-width: 900px;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.text h3 {
+  font-size: 38px;
+  font-weight: 700;
+  color: white;
+}
+.text p {
+  margin-top: 4px;
+  margin-bottom: 30px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #999999;
+}
+.text button {
+  width: 206px;
+  height: 56px;
+  background-color: red;
+  color: white;
+  border-radius: 8px;
+  font-size: 18px;
+}
+/* разделитель */
+.title {
+  margin: 60px auto;
+  max-width: 870px;
+  min-height: 88px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1e1e1e;
+  border: 1px solid #000000;
+  color: white;
+  font-size: 35px;
+  font-weight: 500;
+  letter-spacing: -0.6%;
+  line-height: 24px;
+  border-radius: 6px;
+}
+/* таймлайны на неделю */
+.scheduleWrapper {
+  background-color: #111;
+  border-radius: 20px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.dataTable {
+  display: grid;
+  grid-template-columns: 60px repeat(7, 1fr);
+  grid-auto-rows: 60px;
+  gap: 4px;
+}
+
+.headerEmpty {
+  background: transparent;
+}
+
+.headerCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.timeCell {
+  background-color: #e6e6e6;
+  color: black;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.row {
+  display: contents;
+}
+
+.cell {
+  background-color: #c9c9c9;
+  border-radius: 6px;
+}
+
+.orangeCell {
+  background-color: orange;
+  color: black;
+  font-weight: bold;
+  text-align: center;
+  padding: 5px;
+}
+
+.greenCell {
+  background-color: mediumseagreen;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding: 5px;
+}
+/* финансовый модуль */
+.financeBacground {
+  background-color: #1c1a1b;
+  padding: 110px 60px;
+  width: 100%;
+  min-height: 1000px;
+}
+.financeContainer {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+.balance,
+.expenses {
+  background-color: #1a1c22;
+  border-radius: 8px;
+  max-width: 215px;
+  width: 100%;
+  min-height: 95px;
+  padding: 17px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.3s;
+}
+.balance:hover,
+.expenses:hover,
+.graph:hover,
+.payment:hover,
+.credit:hover,
+.transactions:hover {
+  background-color: #262931;
+}
+.image {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #282c35;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.info p:nth-child(1) {
+  color: #9e9e9e;
+  font-size: 12px;
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+.info p:nth-child(2) {
+  color: white;
+  font-size: 26px;
+  font-weight: 500;
+}
+/* график */
+.graph {
+  width: 100%;
+  height: 297px;
+  background-color: #1c1c1e;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+.overwiew {
+  max-width: 645px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+.payment {
+  background-color: #1a1c22;
+  border-radius: 8px;
+  max-width: 295px;
+  width: 100%;
+  height: 265px;
+  padding: 20px;
+}
+.payment p {
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+}
+.paymentList {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.paymentItem {
+  display: flex;
+  gap: 10px;
+}
+.icon {
+  background-color: #101114;
+  color: #00ff59;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 16px;
+}
+.info {
+  flex: 1;
+}
+.label {
+  color: white;
+  font-size: 13px;
+  font-weight: 500;
+}
+.amount {
+  font-size: 12px;
+  color: #a1a1a1;
+  margin: 2px 0;
+}
+.progress {
+  background: #2a2c30;
+  border-radius: 4px;
+  height: 5px;
+  width: 100%;
+}
+.bar {
+  background: #00ff59;
+  height: 5px;
+  border-radius: 4px;
+}
+
+.credit {
+  background-color: #1a1c22;
+  border-radius: 8px;
+  max-width: 314px;
+  width: 100%;
+  height: 246px;
+  padding: 20px;
+}
+.cardTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.cardTitle p {
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+}
+.cardTitle button {
+  width: 30px;
+  height: 30px;
+  background-color: #282c35;
+  border-radius: 6.66px;
+  color: #1fcb4f;
+  font-size: 20px;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.creditCard {
+  width: 100%;
+  height: 162px;
+  background-color: #282c35;
+  border-radius: 8px;
+}
+.cardHeader {
+  width: 100%;
+  height: 66.67%;
+  padding: 60px 20px 20px 20px;
+  color: white;
+}
+.cardBody {
+  background-color: rgba(255, 255, 255, 0.1);
+  width: 100%;
+  height: 53px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+.cardBody div {
+  width: 50%;
+}
+.cardBody div p:nth-child(1) {
+  color: #e5edff;
+  font-weight: 400;
+  font-size: 6px;
+  letter-spacing: 5%;
+  margin-bottom: 7px;
+}
+.cardBody div p:nth-child(2) {
+  color: white;
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 5%;
+}
+.cardBody div:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+.transactionsTitle {
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+}
+.transactions {
+  background-color: #1a1c22;
+  border-radius: 8px;
+  max-width: 314px;
+  width: 100%;
+  height: 260px;
+  padding: 15px;
+}
+.transactions p {
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 37px;
+}
+.transaction {
+  display: flex;
+  align-items: center;
+  padding-bottom: 11px;
+  border-bottom: 0.83px solid #383838;
+  margin-bottom: 13px;
+}
+.transaction:last-child {
+  margin-bottom: 0;
+  border: none;
+}
+.role {
+  color: #9e9e9e;
+}
+.name {
+  color: white;
+}
+.price {
+  color: #ffc01e;
+}
+.transaction img {
+  width: 35px;
+  height: 35px;
+}
+.description {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-left: 12px;
+}
+.description p {
+  margin: 0;
+}
