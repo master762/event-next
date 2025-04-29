@@ -194,6 +194,8 @@ export default function page() {
                     <YAxis
                       tickFormatter={(value) => `${value.toLocaleString()}₽`}
                       tick={{ fill: "#ccc" }}
+                      width={90}
+                      tickMargin={7}
                     />
                     <Tooltip
                       formatter={(value) => `${value.toLocaleString()}₽`}
