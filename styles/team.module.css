@@ -1,0 +1,199 @@
+.filter {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 66px;
+  align-items: center;
+  width: 100%;
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 55.38%;
+}
+.nav ul li {
+  color: black;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 130%;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav ul li.active {
+  color: #0070f3;
+}
+
+.nav ul li.active::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #0070f3;
+}
+
+.nav ul li:hover {
+  color: #0070f3;
+}
+.filter button {
+  background-color: rgba(123, 226, 255, 0.76);
+  width: 264px;
+  height: 57px;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 18px;
+  line-height: 130%;
+  font-size: 18px;
+  font-weight: 700;
+}
+.search {
+  width: 90%;
+  height: 40px;
+  margin: 20 auto;
+  background-color: #d9d9d9;
+  border-radius: 20px;
+  display: flex;
+  gap: 11px;
+  padding: 11px 30px;
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.searchFocused {
+  border-color: #0070f3;
+}
+
+.search input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+}
+
+.search input:focus {
+  outline: none;
+}
+
+.cards {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.card {
+  max-width: 400px;
+  width: 100%;
+  min-height: 220px;
+  background-color: #d9d9d9;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 40px;
+  position: relative;
+}
+.card:hover .delete,
+.card:hover .add {
+  opacity: 1;
+}
+
+.delete,
+.add {
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.delete {
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  background-color: red;
+  font-size: 26px;
+  color: white;
+}
+.add {
+  right: 20px;
+  bottom: 8px;
+  width: 153px;
+  height: 34px;
+  background-color: rgba(123, 226, 255, 0.8);
+  border-radius: 15px;
+}
+.text {
+  width: 100%;
+  height: 100%;
+  padding: 22px 30px 8px 13px;
+}
+.text h3 {
+  margin-bottom: 2px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 150%;
+  color: black;
+  white-space: nowrap;
+}
+.text p {
+  color: #616161;
+  line-height: 130%;
+  font-size: 14px;
+  font-weight: 700;
+}
+.text p:nth-child(3) {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.text button {
+  background: transparent;
+  border: 1px solid #616161;
+  border-radius: 30px;
+  height: 48px;
+  width: 129px;
+}
+.text span {
+  color: rgba(0, 0, 0, 0.7);
+  line-height: 130%;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+}
+.image img {
+  height: 100%;
+  width: 100%;
+}
+.loadMoreContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.loadMoreContainer button {
+  padding: 10px 20px;
+  background-color: #0070f3;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.loadMoreContainer button:hover {
+  background-color: #005bb5;
+}
+.noResults {
+  text-align: center;
+  width: 100%;
+  padding: 20px;
+  font-size: 18px;
+  color: #666;
+}
