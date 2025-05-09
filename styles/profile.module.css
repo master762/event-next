@@ -1,0 +1,274 @@
+/* Глобальные переменные */
+:root {
+  --shadow: 1px 1px 22.1px 11px rgba(0, 0, 0, 0.25); /* Тень для карточек */
+}
+/* Заголовок страницы */
+.title {
+  text-align: center;
+  padding-top: 42px;
+  margin-bottom: 60px;
+  color: rgba(0, 0, 0, 1);
+  font-weight: 350;
+  font-size: 28px;
+  line-height: 100%;
+}
+/* Верхний блок (flex-контейнер) */
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+/* Общие стили для карточек профиля */
+.mainProfile,
+.infoProfile {
+  max-width: 360px;
+  width: 100%;
+  min-height: 448px;
+  box-shadow: var(--shadow);
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 25px;
+}
+/* Левая карточка (основной профиль) */
+.name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  position: relative;
+}
+
+.name p {
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 100%;
+  margin: 0;
+}
+
+.avatarContainer {
+  position: relative;
+  width: 229px;
+  height: 263px;
+  margin: 30px auto;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.avatarWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+  transition: opacity 0.3s ease;
+}
+
+.changeAvatarButton {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 16px;
+  background-color: rgba(0, 121, 254, 0.9);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 2;
+}
+.avatarContainer .changeAvatarButton:active {
+  transform: translateX(-50%);
+}
+.avatarWrapper:hover .changeAvatarButton {
+  opacity: 1;
+}
+
+.avatarWrapper:hover .avatar {
+  opacity: 0.8;
+}
+
+.avatarWrapper::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.avatarWrapper:hover::after {
+  opacity: 1;
+}
+/* Правая карточка (информация профиля) */
+.container {
+  max-width: 326px;
+  margin: 0 auto;
+  margin-top: 12%;
+}
+.edit {
+  display: flex;
+  justify-content: end;
+  padding-top: 18px;
+  padding-right: 18px;
+  margin-bottom: 41px;
+}
+/* Элементы информации */
+.info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid;
+  margin-bottom: 15px;
+}
+.info p {
+  color: rgba(97, 97, 97, 1);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 100%;
+}
+.info span {
+  padding-right: 18px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 100%;
+  transition: 0.3s;
+  color: rgba(0, 0, 0, 1);
+}
+.info span:hover {
+  color: rgba(0, 121, 254, 1);
+}
+/* Нижний блок (описание профиля) */
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 105px;
+  margin-bottom: 80px;
+}
+.desc {
+  max-width: 810px;
+  width: 100%;
+  min-height: 448px;
+  border-radius: 25px;
+  box-shadow: var(--shadow);
+}
+.titleDesc {
+  margin-left: 60px;
+  margin-top: 48px;
+  margin-bottom: 60px;
+}
+.bodyDesc {
+  margin: 0 auto;
+  max-width: 582px;
+}
+.titleDesc,
+.bodyDesc {
+  font-weight: 350;
+  font-size: 28px;
+  line-height: 24px;
+  color: rgba(0, 0, 0, 1);
+}
+/* Стили для редактирования, кнопка  для редактирования*/
+.editButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 10px;
+  display: none;
+}
+.editMainButton {
+  background: transparent;
+  width: 30px;
+  height: 30px;
+}
+.info:hover .editButton {
+  display: block;
+}
+.editButton img {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.2s;
+}
+.editButton:hover img {
+  transform: scale(1.1);
+}
+.infoContent {
+  display: flex;
+  align-items: center;
+}
+/* Модальное окно редактирования */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+.modal h3 {
+  margin-top: 0;
+  color: #333;
+}
+.editInput,
+.editTextarea {
+  width: 100%;
+  padding: 10px;
+  margin: 15px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+.editTextarea {
+  min-height: 150px;
+  resize: vertical;
+}
+.modalButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.saveButton {
+  background-color: #0079fe;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+.saveButton:hover {
+  background-color: #0066cc;
+}
+.cancelButton {
+  background-color: #f1f1f1;
+  color: #333;
+  padding: 10px;
+  border-radius: 10px;
+}
+.cancelButton:hover {
+  background-color: #e1e1e1;
+}
