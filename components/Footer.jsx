@@ -22,7 +22,10 @@ export default function Footer() {
             <li>О компании</li>
             <li>Связь</li>
             <li>Описание проекта</li>
-            <li>Команда разработчиков</li>
+
+            <li>
+              <Link href="/developersTeam">Команда разработчиков</Link>
+            </li>
           </ul>
           <ul className={styles.column}>
             <li>Панель управления</li>

@@ -2,6 +2,7 @@
 import styles from "@/styles/chat.module.css";
 import FileUploadButton from "@/components/FileUploadButton";
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 
 export default function Page() {
   const [messages, setMessages] = useState([
@@ -195,7 +196,9 @@ export default function Page() {
     <section>
       <div className={styles.chatHeader}>
         <div className={styles.navigation}>
-          <img src="/img/home.svg" alt="" />
+          <Link href="/">
+            <img src="/img/home.svg" alt="" />
+          </Link>
           <div className={styles.search}>
             <img src="/img/search.svg" alt="поиск" />
             <input type="search" placeholder="начните вводить" />

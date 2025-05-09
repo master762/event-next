@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import styles from "@/styles/login.module.css";
-
+import Link from "next/link";
 export default function LoginForm() {
   const [form, setForm] = useState({
     name: "",
@@ -54,7 +54,6 @@ export default function LoginForm() {
     e.preventDefault();
     if (!isValid) return;
 
-    // Здесь вы можете отправить форму на сервер
     console.log("Форма отправлена:", form);
   };
 
@@ -63,10 +62,14 @@ export default function LoginForm() {
       <div className="container">
         <div className={styles.background}></div>
         <header className={styles.elements}>
-          <img src="/img/logo.svg" alt="Логотип" />
-          <button type="button">
-            <span>Войти</span>
-          </button>
+          <Link href="/">
+            <img src="/img/logo.svg" alt="Логотип" />
+          </Link>
+          <Link href="/signin">
+            <button type="button">
+              <span>Войти</span>
+            </button>
+          </Link>
         </header>
         <main>
           <form className={styles.form} onSubmit={handleSubmit}>

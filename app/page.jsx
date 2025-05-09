@@ -3,17 +3,22 @@ import Image from "next/image";
 import Header from "@/components/Header";
 import React from "react";
 import styles from "@/styles/mainPage.module.css";
+import Developers from "@/components/Developers";
 
 export default function Page() {
   return (
     <>
       <Header />
       <section>
-        <div className={styles.aboutSectionTitle}>
+        <div className={styles.aboutSectionTitle} data-aos="fade-down">
           <h2>О нас</h2>
         </div>
         <div className="container">
-          <div className={styles.aboutItem}>
+          <div
+            className={styles.aboutItem}
+            data-aos="fade-right"
+            data-aos-delay="100"
+          >
             <p className={styles.aboutText}>
               Мы - сайт для организации мероприятий с возможностью совместного
               планирования в реальном времени.
@@ -23,9 +28,14 @@ export default function Page() {
               alt="Логотип"
               width={642}
               height={429}
+              data-aos="zoom-in"
             />
           </div>
-          <div className={styles.aboutItem}>
+          <div
+            className={styles.aboutItem}
+            data-aos="fade-left"
+            data-aos-delay="100"
+          >
             <p className={styles.aboutText}>
               Несколько организаторов (например, декоратор, кейтеринг, ведущий)
               могут работать над одним мероприятием, видя общий таймлайн, бюджет
@@ -36,6 +46,7 @@ export default function Page() {
               alt="Логотип"
               width={642}
               height={429}
+              data-aos="zoom-in"
             />
           </div>
         </div>
@@ -43,11 +54,15 @@ export default function Page() {
 
       <section className={styles.strengthsSection}>
         <div className={styles.strengthsWrapper}>
-          <div className={styles.strengthsContent}>
+          <div className={styles.strengthsContent} data-aos="fade-up">
             <h2>Наши сильные стороны</h2>
             <div className={styles.strengthsBox}>
               <div className={styles.strengthsRow}>
-                <div className={styles.strengthsItem}>
+                <div
+                  className={styles.strengthsItem}
+                  data-aos="flip-left"
+                  data-aos-delay="200"
+                >
                   <p>
                     Совместное планирование <br /> в реальном времени.
                   </p>
@@ -61,7 +76,11 @@ export default function Page() {
                   </div>
                 </div>
                 <div className={styles.strengthsSeparator}></div>
-                <div className={styles.strengthsItem}>
+                <div
+                  className={styles.strengthsItem}
+                  data-aos="flip-right"
+                  data-aos-delay="300"
+                >
                   <div className={styles.strengthsIcon}>
                     <Image
                       src="/img/icon1.svg"
@@ -77,7 +96,11 @@ export default function Page() {
                 </div>
               </div>
 
-              <div className={styles.strengthsBottom}>
+              <div
+                className={styles.strengthsBottom}
+                data-aos="zoom-in-up"
+                data-aos-delay="400"
+              >
                 <div className={styles.strengthsIcon}>
                   <Image
                     src="/img/icon2.svg"
@@ -92,7 +115,11 @@ export default function Page() {
               </div>
             </div>
           </div>
-          <div className={styles.right}>
+          <div
+            className={styles.right}
+            data-aos="fade-left"
+            data-aos-delay="500"
+          >
             <Image
               src="/img/image3.png"
               alt="Логотип"
@@ -102,98 +129,7 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <section className="container">
-        <h2 className={styles.TeamTitle}>Команда разработчиков</h2>
-        <div className={styles.cards}>
-          <div className={styles.card}>
-            <div
-              className={styles.image}
-              style={{ backgroundImage: "url(/img/image4.png)" }}
-            >
-              <a
-                href="https://t.me/Kotory_d"
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                title="нажмите, что бы перейти в телеграм"
-              >
-                <img src="/img/telegram.svg" alt="телеграм" />
-              </a>
-            </div>
-            <div className={styles.cardText}>
-              <h3>Красота Дмитрий</h3>
-              <p>Разработчик</p>
-            </div>
-            <div className={styles.inputWrapper}>
-              <input
-                className={styles.input}
-                type="text"
-                placeholder="Скажи Здравствуйте!"
-              />
-              <button>
-                <img src="/img/styledTelegram.svg" alt="телеграм" />
-              </button>
-            </div>
-          </div>
-          <div className={styles.card}>
-            <div
-              className={styles.image}
-              style={{ backgroundImage: "url(/img/ilya.png)" }}
-            >
-              <a
-                href="https://t.me/Frazen_0"
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                title="нажмите, что бы перейти в телеграм"
-              >
-                <img src="/img/telegram.svg" alt="телеграм" />
-              </a>
-            </div>
-            <div className={styles.cardText}>
-              <h3>Своеволин Илья</h3>
-              <p>UX/UI Дизайнер</p>
-            </div>
-            <div className={styles.inputWrapper}>
-              <input
-                className={styles.input}
-                type="text"
-                placeholder="Скажи Здравствуйте!"
-              />
-              <button>
-                <img src="/img/styledTelegram.svg" alt="телеграм" />
-              </button>
-            </div>
-          </div>
-          <div className={styles.card}>
-            <div
-              className={styles.image}
-              style={{ backgroundImage: "url(/img/kostya.png)" }}
-            >
-              <a
-                href="https://t.me/kiseeii"
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                title="нажмите, что бы перейти в телеграм"
-              >
-                <img src="/img/telegram.svg" alt="телеграм" />
-              </a>
-            </div>
-            <div className={styles.cardText}>
-              <h3>Губарь Константин</h3>
-              <p>Фото/Видеоредактор</p>
-            </div>
-            <div className={styles.inputWrapper}>
-              <input
-                className={styles.input}
-                type="text"
-                placeholder="Скажи Здравствуйте!"
-              />
-              <button>
-                <img src="/img/styledTelegram.svg" alt="телеграм" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Developers />
       <Footer />
     </>
   );

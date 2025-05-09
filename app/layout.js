@@ -1,4 +1,5 @@
 import "./globals.css";
+import AOS from "@/components/AOSInitializer";
 import { Inter } from "next/font/google";
 const inter = Inter({
   subsets: ["cyrillic", "latin"],
@@ -12,6 +13,7 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/img/logo.svg" />
       </head>
       <body>
+        <AOS />
         <main>{children}</main>
       </body>
     </html>

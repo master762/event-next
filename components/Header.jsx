@@ -3,19 +3,30 @@ import React, { useState } from "react";
 import styles from "@/styles/header.module.css";
 import Image from "next/image";
 import Link from "next/link";
+
 export default function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   return (
-    <header className={styles.header}>
-      <Link href="/">
+    <header
+      className={styles.header}
+      data-aos="fade-down"
+      data-aos-duration="500"
+    >
+      {/* Логотип с анимацией */}
+      <Link href="/" data-aos="fade-right" data-aos-delay="100">
         <Image src="/img/logo.svg" alt="Логотип" width={136} height={37} />
       </Link>
+
+      {/* Навигация */}
       <nav>
         <ul className={styles.nav}>
           <li
             className={styles.dropdown}
             onMouseEnter={() => setIsDropdownOpen(true)}
             onMouseLeave={() => setIsDropdownOpen(false)}
+            data-aos="fade-down"
+            data-aos-delay="200"
           >
             <div className={styles.dropdownTrigger}>
               <Image src="/img/arrow.svg" alt="список" width={15} height={15} />
@@ -35,14 +46,18 @@ export default function Header() {
               </ul>
             )}
           </li>
-          <li>
+
+          {/* Пункты меню с последовательной анимацией */}
+          <li data-aos="fade-down" data-aos-delay="250">
             <Link href="/chat">Мессенджер</Link>
           </li>
-          <li>
+          <li data-aos="fade-down" data-aos-delay="300">
             <Link href="/">Главная</Link>
           </li>
         </ul>
       </nav>
+
+      {/* Правая часть хедера */}
       <div className={styles.right}>
         <Image
           className={styles.notifications}
@@ -50,11 +65,20 @@ export default function Header() {
           alt="Уведомления"
           width={32}
           height={32}
+          data-aos="fade-left"
+          data-aos-delay="350"
         />
-        <div className={styles.buttons}>
-          <button className={styles.outlined}>Создать мероприятие</button>
 
-          <Link href="/login">
+        <div className={styles.buttons}>
+          <button
+            className={styles.outlined}
+            data-aos="fade-left"
+            data-aos-delay="400"
+          >
+            Создать мероприятие
+          </button>
+
+          <Link href="/login" data-aos="fade-left" data-aos-delay="450">
             <button className={styles.filled}>Регистрация</button>
           </Link>
         </div>

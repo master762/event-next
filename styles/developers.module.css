@@ -1,0 +1,97 @@
+.TeamTitle {
+  font-size: 48px;
+  font-weight: 500;
+  color: #000000;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+.cards {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 120px;
+}
+.card {
+  max-width: 420px;
+  width: 100%;
+  padding: 24px;
+  min-height: 450px;
+  border: 1px solid #262626;
+  border-radius: 12px;
+}
+.image {
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  border-radius: 10px;
+  width: 100%;
+  min-height: 220px;
+}
+.image a {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: 180px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.cardText {
+  margin-top: 50px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.cardText h3 {
+  color: #000000;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 600;
+}
+.cardText p {
+  color: #999999;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+}
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  background-color: #1a1a1a;
+  border: 1px solid #262626;
+  border-radius: 50px;
+  max-width: 365px;
+  width: 100%;
+  min-height: 56px;
+  padding-right: 10px;
+  transition: 0.3s;
+}
+.input {
+  padding: 10px 20px;
+  max-width: 280px;
+  width: 100%;
+  background-color: #1a1a1a;
+  border: none;
+  position: relative;
+  color: white;
+}
+.input:focus {
+  border: none;
+  outline: none;
+}
+.inputWrapper:hover {
+  border: 1px solid rgb(0, 89, 255);
+}
+.inputWrapper:focus-within {
+  border: 1px solid rgb(0, 255, 21);
+}
+.inputWrapper button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #703bf7;
+}
