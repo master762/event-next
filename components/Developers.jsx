@@ -1,100 +1,83 @@
 import React from "react";
 import styles from "@/styles/developers.module.css";
-export default function Developers() {
+
+export default function Developers({ showManyCard = true }) {
+  const teamMembers = [
+    {
+      name: "Красота Дмитрий",
+      role: "Аналитик/Разработчик",
+      image: "/img/dima.jpg",
+      telegram: "https://t.me/Kotory_d",
+    },
+    {
+      name: "Своеволин Илья",
+      role: "UX/UI Дизайнер",
+      image: "/img/ilya.png",
+      telegram: "https://t.me/Frazen_0",
+    },
+    {
+      name: "Губарь Константин",
+      role: "Аналитик/Разработчик",
+      image: "/img/kostya.png",
+      telegram: "https://t.me/kiseeii",
+    },
+    ...(showManyCard
+      ? [
+          {
+            name: "Орехов Кирилл",
+            role: "Разработчик",
+            image: "/img/kirill.jpg",
+            telegram: "/",
+          },
+        ]
+      : []),
+  ];
+
   return (
-    <div>
+    <>
       <section className="container">
-        <h2 className={styles.TeamTitle}>Команда разработчиков</h2>
+        <h2 className={styles.TeamTitle} data-aos="fade-up">
+          Команда разработчиков
+        </h2>
         <div className={styles.cards}>
-          <div className={styles.card}>
+          {teamMembers.map((member, index) => (
             <div
-              className={styles.image}
-              style={{ backgroundImage: "url(/img/image4.png)" }}
+              key={index}
+              className={styles.card}
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
             >
-              <a
-                href="https://t.me/Kotory_d"
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                title="нажмите, что бы перейти в телеграм"
+              <div
+                className={styles.image}
+                style={{ backgroundImage: `url(${member.image})` }}
               >
-                <img src="/img/telegram.svg" alt="телеграм" />
-              </a>
+                <a
+                  href={member.telegram}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  title="нажмите, что бы перейти в телеграм"
+                >
+                  <img src="/img/telegram.svg" alt="телеграм" />
+                </a>
+              </div>
+              <div className={styles.cardText}>
+                <h3>{member.name}</h3>
+                <p>{member.role}</p>
+              </div>
+              <div className={styles.inputWrapper}>
+                <input
+                  className={styles.input}
+                  type="text"
+                  placeholder="Скажи Здравствуйте!"
+                />
+                <button>
+                  <img src="/img/styledTelegram.svg" alt="телеграм" />
+                </button>
+              </div>
             </div>
-            <div className={styles.cardText}>
-              <h3>Красота Дмитрий</h3>
-              <p>Разработчик</p>
-            </div>
-            <div className={styles.inputWrapper}>
-              <input
-                className={styles.input}
-                type="text"
-                placeholder="Скажи Здравствуйте!"
-              />
-              <button>
-                <img src="/img/styledTelegram.svg" alt="телеграм" />
-              </button>
-            </div>
-          </div>
-          <div className={styles.card}>
-            <div
-              className={styles.image}
-              style={{ backgroundImage: "url(/img/ilya.png)" }}
-            >
-              <a
-                href="https://t.me/Frazen_0"
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                title="нажмите, что бы перейти в телеграм"
-              >
-                <img src="/img/telegram.svg" alt="телеграм" />
-              </a>
-            </div>
-            <div className={styles.cardText}>
-              <h3>Своеволин Илья</h3>
-              <p>UX/UI Дизайнер</p>
-            </div>
-            <div className={styles.inputWrapper}>
-              <input
-                className={styles.input}
-                type="text"
-                placeholder="Скажи Здравствуйте!"
-              />
-              <button>
-                <img src="/img/styledTelegram.svg" alt="телеграм" />
-              </button>
-            </div>
-          </div>
-          <div className={styles.card}>
-            <div
-              className={styles.image}
-              style={{ backgroundImage: "url(/img/kostya.png)" }}
-            >
-              <a
-                href="https://t.me/kiseeii"
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                title="нажмите, что бы перейти в телеграм"
-              >
-                <img src="/img/telegram.svg" alt="телеграм" />
-              </a>
-            </div>
-            <div className={styles.cardText}>
-              <h3>Губарь Константин</h3>
-              <p>Фото/Видеоредактор</p>
-            </div>
-            <div className={styles.inputWrapper}>
-              <input
-                className={styles.input}
-                type="text"
-                placeholder="Скажи Здравствуйте!"
-              />
-              <button>
-                <img src="/img/styledTelegram.svg" alt="телеграм" />
-              </button>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
-    </div>
+    </>
   );
 }
