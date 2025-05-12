@@ -1,15 +1,18 @@
+"use client";
+import { Element } from "react-scroll";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import React from "react";
 import Profile from "./Profile";
 import Events from "@/components/Events";
 
-export default function page() {
+export default function HomePage() {
   return (
     <>
       <Header />
       <Profile />
-      <Events />
+      <Element name="events">
+        <Events />
+      </Element>
       <Footer />
     </>
   );

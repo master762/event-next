@@ -1,4 +1,10 @@
 /* Блок "О нас" */
+.section,
+.strengthsSection {
+  width: 100%;
+  overflow-x: clip;
+}
+
 .aboutSectionTitle {
   color: #000;
   font-size: 48px;
@@ -9,28 +15,25 @@
   padding-bottom: 55px;
   border-bottom: 1px solid #000;
 }
+
 .aboutItem {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 130px;
 }
+
 .aboutItem:nth-child(2) {
   flex-direction: row-reverse;
 }
+
 .aboutText {
   max-width: 546px;
   font-size: 28px;
   font-weight: 400;
   text-align: center;
 }
-@media (max-width: 768px) {
-  .aboutItem {
-    flex-direction: column;
-    text-align: center;
-    gap: 30px;
-  }
-}
+
 /* Блок "Наши сильные стороны" */
 .strengthsSection {
   background-color: #1c1a1b;
@@ -127,4 +130,159 @@
   font-weight: 400;
   line-height: 150%;
   color: #fff;
+}
+
+/* Адаптация для планшетов */
+@media (max-width: 1024px) {
+  .aboutSectionTitle {
+    font-size: 36px;
+    margin-bottom: 70px;
+    padding-bottom: 40px;
+  }
+
+  .aboutText {
+    font-size: 22px;
+    max-width: 450px;
+  }
+
+  .strengthsContent h2 {
+    font-size: 36px;
+    margin-bottom: 100px;
+  }
+
+  .strengthsBox {
+    padding: 40px;
+  }
+
+  .strengthsItem p,
+  .strengthsBottom p {
+    font-size: 20px;
+  }
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 768px) {
+  .aboutSectionTitle {
+    font-size: 28px;
+    margin-top: 40px;
+    margin-bottom: 50px;
+    padding-bottom: 30px;
+  }
+
+  .aboutItem {
+    flex-direction: column !important;
+    gap: 30px;
+    margin-bottom: 80px;
+  }
+
+  .aboutText {
+    font-size: 18px;
+    max-width: 100%;
+    padding: 0 20px;
+  }
+
+  .strengthsContent {
+    margin-top: 60px;
+  }
+
+  .strengthsContent h2 {
+    font-size: 28px;
+    margin-bottom: 70px;
+  }
+
+  .strengthsBox {
+    padding: 30px 20px;
+  }
+
+  .strengthsRow {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+  }
+
+  .strengthsSeparator {
+    height: 1px;
+    width: 80%;
+    margin: 20px 0;
+  }
+
+  .strengthsItem {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .strengthsItem p {
+    font-size: 18px;
+    max-width: 100%;
+  }
+
+  .strengthsIcon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .strengthsBottom {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .image {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* Адаптация для маленьких мобильных (до 320px) */
+@media (max-width: 480px) {
+  .aboutSectionTitle {
+    font-size: 24px;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+  }
+
+  .aboutText {
+    font-size: 16px;
+  }
+
+  .strengthsContent h2 {
+    font-size: 24px;
+    margin-bottom: 50px;
+  }
+
+  .strengthsItem p,
+  .strengthsBottom p {
+    font-size: 16px;
+  }
+
+  .strengthsIcon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .strengthsIcon img {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (max-width: 320px) {
+  .aboutSectionTitle {
+    font-size: 22px;
+  }
+
+  .aboutText {
+    font-size: 15px;
+  }
+
+  .strengthsContent h2 {
+    font-size: 22px;
+  }
+
+  .strengthsItem p,
+  .strengthsBottom p {
+    font-size: 15px;
+  }
 }

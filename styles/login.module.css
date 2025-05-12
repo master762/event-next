@@ -1,3 +1,12 @@
+.apiError {
+  color: #ff4444;
+  background: #ffeeee;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  text-align: center;
+  border: 1px solid #ffcccc;
+}
 /* хедер и фон */
 .elements {
   display: flex;

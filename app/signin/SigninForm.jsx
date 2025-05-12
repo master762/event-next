@@ -2,9 +2,12 @@
 import React, { useState, useEffect } from "react";
 import styles from "@/styles/signin.module.css";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+
 export default function LoginForm() {
+  const router = useRouter();
   const [form, setForm] = useState({
-    name: "",
     email: "",
     password: "",
     policyAccepted: false,
@@ -12,12 +15,13 @@ export default function LoginForm() {
 
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [authError, setAuthError] = useState("");
 
   useEffect(() => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     const newErrors = {};
-    if (!form.name.trim()) newErrors.name = "Введите имя";
     if (!form.email.trim()) newErrors.email = "Введите почту";
     else if (!emailRegex.test(form.email))
       newErrors.email = "Некорректный email";
@@ -35,26 +39,60 @@ export default function LoginForm() {
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }));
+    // Очищаем ошибку при изменении поля
+    if (authError) setAuthError("");
   };
 
   const handleBlur = (e) => {
-    const { name } = e.target;
+    const { name, type } = e.target;
     const newErrors = { ...errors };
-    if (!form[name].trim()) {
-      newErrors[name] = `${
-        name === "policyAccepted" ? "Политика" : name
-      } обязательна`;
+
+    if (type === "checkbox") {
+      if (!form[name]) {
+        newErrors[name] = "Нужно согласиться с политикой";
+      } else {
+        delete newErrors[name];
+      }
     } else {
-      delete newErrors[name];
+      if (!form[name].trim()) {
+        newErrors[name] = `Поле обязательно для заполнения`;
+      } else {
+        delete newErrors[name];
+      }
     }
+
     setErrors(newErrors);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isValid) return;
 
-    console.log("Форма отправлена:", form);
+    setIsLoading(true);
+    setAuthError("");
+
+    try {
+      const result = await signIn("credentials", {
+        email: form.email,
+        password: form.password,
+        redirect: false,
+      });
+
+      if (result?.error) {
+        setAuthError("Неверный email или пароль");
+      } else {
+        router.push("/profile");
+      }
+    } catch (error) {
+      setAuthError("Ошибка при входе. Попробуйте позже.");
+      console.error("Login error:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleProviderLogin = (provider) => {
+    signIn(provider, { callbackUrl: "/profile" });
   };
 
   return (
@@ -74,6 +112,9 @@ export default function LoginForm() {
         <main>
           <form className={styles.form} onSubmit={handleSubmit}>
             <h2 className={styles.title}>Войти</h2>
+
+            {authError && <div className={styles.authError}>{authError}</div>}
+
             {/* Email */}
             <div className={styles.inputGroup}>
               <input
@@ -135,20 +176,32 @@ export default function LoginForm() {
             <button
               type="submit"
               className={styles.createAccount}
-              disabled={!isValid}
+              disabled={!isValid || isLoading}
             >
-              <span>Продолжить</span>
+              <span>{isLoading ? "Вход..." : "Продолжить"}</span>
             </button>
 
             <p className={styles.or}>Войти через</p>
             <div className={styles.providers}>
-              <button type="button">
+              <button
+                type="button"
+                onClick={() => handleProviderLogin("google")}
+                disabled={isLoading}
+              >
                 <img src="/img/google.svg" alt="Войти через Google" />
               </button>
-              <button type="button">
+              <button
+                type="button"
+                onClick={() => handleProviderLogin("apple")}
+                disabled={isLoading}
+              >
                 <img src="/img/Apple.svg" alt="Войти через Apple" />
               </button>
-              <button type="button">
+              <button
+                type="button"
+                onClick={() => handleProviderLogin("facebook")}
+                disabled={isLoading}
+              >
                 <img src="/img/facebook.svg" alt="Войти через Facebook" />
               </button>
             </div>

@@ -9,7 +9,7 @@ export default function Page() {
   return (
     <>
       <Header />
-      <section>
+      <section className={styles.section}>
         <div className={styles.aboutSectionTitle} data-aos="fade-down">
           <h2>О нас</h2>
         </div>
@@ -125,6 +125,7 @@ export default function Page() {
               alt="Логотип"
               width={591}
               height={887}
+              className={styles.image}
             />
           </div>
         </div>

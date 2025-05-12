@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useRef } from "react";
 import styles from "@/styles/profile.module.css";
-
+import { Link } from "react-scroll";
 export default function Profile() {
   // Состояние профиля
   const [profile, setProfile] = useState({
@@ -48,6 +48,15 @@ export default function Profile() {
 
   return (
     <section className={styles.section}>
+      <Link
+        to="events"
+        smooth={true}
+        duration={500}
+        className={styles.buttonScroll}
+      >
+        <img src="/img/arrow.svg" alt="стрелочка" />
+      </Link>
+
       <div className="container">
         <div className={styles.title}>
           <h1>Мой профиль</h1>
@@ -87,7 +96,6 @@ export default function Profile() {
               />
             </div>
           </div>
-
           <div className={styles.infoProfile}>
             <div className={styles.container}>
               {Object.entries({
