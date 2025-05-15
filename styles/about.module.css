@@ -1,0 +1,159 @@
+/* Hero Section */
+.hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("https://images.unsplash.com/photo-1454165804606-c3d57bc86b40");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  padding: 150px 0 100px;
+  margin-top: 70px;
+}
+
+.hero h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 20px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* About Section */
+.aboutSection {
+  padding: 80px 0;
+  background-color: white;
+}
+
+.aboutContent {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.aboutText {
+  flex: 1;
+}
+
+.aboutText h2 {
+  font-size: 36px;
+  margin-bottom: 30px;
+  color: var(--secondary-color);
+}
+
+.aboutText p {
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: var(--text-light);
+}
+
+.aboutImage {
+  flex: 1;
+}
+
+.aboutImage img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Values Section */
+.values {
+  padding: 80px 0;
+  background-color: var(--light-color);
+  text-align: center;
+}
+
+.values h2 {
+  font-size: 36px;
+  margin-bottom: 50px;
+  color: var(--secondary-color);
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.valueCard {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.valueCard:hover {
+  transform: translateY(-10px);
+}
+
+.valueIcon {
+  font-size: 40px;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.valueCard h3 {
+  margin-bottom: 15px;
+  color: var(--secondary-color);
+}
+
+/* Адаптация */
+@media (max-width: 992px) {
+  .aboutContent {
+    flex-direction: column;
+  }
+
+  .aboutText,
+  .aboutImage {
+    flex: none;
+    width: 100%;
+  }
+
+  .aboutImage {
+    order: -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 120px 0 80px;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+  }
+
+  .hero p {
+    font-size: 18px;
+  }
+
+  .aboutSection,
+  .values,
+  .team {
+    padding: 60px 0;
+  }
+
+  .aboutText h2,
+  .values h2,
+  .team h2 {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero {
+    padding: 100px 0 60px;
+  }
+
+  .hero h1 {
+    font-size: 30px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+}

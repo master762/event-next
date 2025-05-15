@@ -10,16 +10,30 @@ datasource db {
 
 model User {
   id             String    @id @default(cuid())
-  name           String
+  name           String?
   email          String    @unique
   emailVerified  DateTime?
-  password       String
-  image          String?
+  password       String?
+  image          String?   @default("/default-avatar.jpg")
   policyAccepted Boolean   @default(false)
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
-  Account        Account[]
-  Session        Session[]
+  profile        Profile?
+  accounts       Account[]
+  sessions       Session[]
+}
+
+model Profile {
+  id          String    @id @default(cuid())
+  userId      String    @unique
+  user        User      @relation(fields: [userId], references: [id])
+  birthDate   DateTime?
+  company     String?
+  phone       String?
+  gender      String?
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
 
 model Account {

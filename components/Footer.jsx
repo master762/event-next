@@ -19,7 +19,9 @@ export default function Footer() {
             </li>
           </ul>
           <ul className={styles.column}>
-            <li>О компании</li>
+            <li>
+              <Link href="/about">О компании</Link>
+            </li>
             <li>Связь</li>
             <li>Описание проекта</li>
 
@@ -42,8 +44,12 @@ export default function Footer() {
             <li>Сервисы для приглашений</li>
           </ul>
           <ul className={styles.column}>
-            <li>Обратная связь</li>
-            <li>FAQ’s</li>
+            <li>
+              <Link href="/reviews"> Обратная связь</Link>
+            </li>
+            <li>
+              <Link href="/faq">FAQ’s</Link>
+            </li>
             <li>Чат поддержки</li>
           </ul>
         </nav>
