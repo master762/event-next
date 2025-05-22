@@ -41,30 +41,52 @@ export default function CreateEventPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const data = new FormData();
-    data.append("title", form.title);
-    data.append("description", form.description);
-    data.append("budget", form.budget);
-    data.append("deadline", form.deadline);
+    let coverImageUrl = null;
 
-    // Передаём участников в виде JSON строки
-    data.append("participants", JSON.stringify(participants));
+    // Шаг 1: загрузка файла обложки (если выбран)
+    if (coverImage) {
+      const imageForm = new FormData();
+      imageForm.append("file", coverImage);
 
-    if (coverImage) data.append("coverImage", coverImage);
+      const uploadRes = await fetch("/api/upload", {
+        method: "POST",
+        body: imageForm,
+      });
 
-    const res = await fetch("/api/events/create", {
+      if (uploadRes.ok) {
+        const { url } = await uploadRes.json();
+        coverImageUrl = url; // пример: "/uploads/12345-image.jpg"
+      } else {
+        alert("Ошибка загрузки обложки");
+        return;
+      }
+    }
+
+    // Шаг 2: создание мероприятия с coverImageUrl
+    const body = {
+      title: form.title,
+      description: form.description,
+      budget: Number(form.budget),
+      deadline: form.deadline,
+      participants: participants,
+      coverImage: coverImageUrl,
+    };
+
+    const res = await fetch("/api/events", {
       method: "POST",
-      body: data,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
     });
 
     if (res.ok) {
       alert("Мероприятие создано!");
-      // Очистка формы (по желанию)
       setForm({ title: "", description: "", budget: "", deadline: "" });
       setParticipants([{ name: "", email: "", role: "" }]);
       setCoverImage(null);
     } else {
-      alert("Ошибка!");
+      alert("Ошибка при создании мероприятия!");
     }
   };
 
