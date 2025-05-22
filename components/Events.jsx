@@ -1,47 +1,50 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import styles from "@/styles/events.module.css";
 
-const events = [
-  {
-    title: "Выпускной",
-    description: "Детство заканчивается, а эмоции остаются. Мы пре...",
-    image: "/img/event.png",
-  },
-  {
-    title: "Выпускной",
-    description: "Детство заканчивается, а эмоции остаются. Мы пре...",
-    image: "/img/event1.png",
-  },
-  {
-    title: "Выпускной",
-    description: "Детство заканчивается, а эмоции остаются. Мы пре...",
-    image: "/img/event2.png",
-  },
-  {
-    title: "Выпускной",
-    description: "Детство заканчивается, а эмоции остаются. Мы пре...",
-    image: "/img/event3.png",
-  },
-];
-
 export default function Events() {
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    const loadEvents = async () => {
+      try {
+        const res = await fetch("/api/events");
+        const data = await res.json();
+        setEvents(data);
+      } catch (error) {
+        console.error("Ошибка при загрузке мероприятий:", error);
+      }
+    };
+
+    loadEvents();
+  }, []);
+
   return (
     <section className={styles.section}>
       <div className={styles.container}>
         <h2 className={styles.title}>Мои мероприятия</h2>
         <div className={styles.cards}>
-          {events.map((event, index) => (
-            <div className={styles.card} key={index}>
-              <img src={event.image} alt={`Событие: ${event.title}`} />
-              <h3>{event.title}</h3>
-              <p>{event.description}</p>
-              <button className={styles.btn}>
-                <span>Увидеть подробности</span>
-              </button>
-              <button className={styles.btn}>
-                <span>Удалить</span>
-              </button>
-            </div>
-          ))}
+          {events.length === 0 ? (
+            <p>Мероприятий пока нет</p>
+          ) : (
+            events.map((event, index) => (
+              <div className={styles.card} key={event.id || index}>
+                <img
+                  src={event.coverImage || "/img/default-event.png"}
+                  alt={`Событие: ${event.title}`}
+                />
+                <h3>{event.title}</h3>
+                <p>{event.description}</p>
+                <button className={styles.btn}>
+                  <span>Увидеть подробности</span>
+                </button>
+                <button className={styles.btn}>
+                  <span>Удалить</span>
+                </button>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </section>

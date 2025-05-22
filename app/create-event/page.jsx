@@ -1,333 +1,141 @@
 "use client";
-import React, { useState } from "react";
-import styles from "@/styles/createEvent.module.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import { useState } from "react";
 
-export default function CreateEvent() {
-  // Основные данные мероприятия
-  const [eventData, setEventData] = useState({
+export default function CreateEventPage() {
+  const [form, setForm] = useState({
     title: "",
     description: "",
-    coverImage: null,
     budget: "",
     deadline: "",
-    participants: [],
   });
 
-  // Данные нового участника
-  const [newParticipant, setNewParticipant] = useState({
-    name: "",
-    email: "",
-    role: "organizer",
-    customRole: "",
-    subRole: "",
-  });
+  // Массив участников, каждый с name, email, role
+  const [participants, setParticipants] = useState([
+    { name: "", email: "", role: "" },
+  ]);
+  const [coverImage, setCoverImage] = useState(null);
 
-  // Состояние для отображения формы добавления участника
-  const [showParticipantForm, setShowParticipantForm] = useState(false);
-
-  // Обработчик изменения основных полей
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setEventData((prev) => ({ ...prev, [name]: value }));
+  // Обновление формы обычных полей
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // Обработчик загрузки изображения
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setEventData((prev) => ({ ...prev, coverImage: reader.result }));
-      };
-      reader.readAsDataURL(file);
-    }
+  // Обновление участников
+  const handleParticipantChange = (index, e) => {
+    const newParticipants = [...participants];
+    newParticipants[index][e.target.name] = e.target.value;
+    setParticipants(newParticipants);
   };
 
-  // Обработчик изменения полей участника
-  const handleParticipantChange = (e) => {
-    const { name, value } = e.target;
-    setNewParticipant((prev) => ({ ...prev, [name]: value }));
-  };
-
-  // Добавление нового участника
+  // Добавить нового участника
   const addParticipant = () => {
-    if (newParticipant.name && newParticipant.email) {
-      setEventData((prev) => ({
-        ...prev,
-        participants: [...prev.participants, newParticipant],
-      }));
-      setNewParticipant({
-        name: "",
-        email: "",
-        role: "organizer",
-        customRole: "",
-        subRole: "",
-      });
-      setShowParticipantForm(false);
-    }
+    setParticipants([...participants, { name: "", email: "", role: "" }]);
   };
 
-  // Удаление участника
+  // Удалить участника
   const removeParticipant = (index) => {
-    setEventData((prev) => ({
-      ...prev,
-      participants: prev.participants.filter((_, i) => i !== index),
-    }));
+    const newParticipants = participants.filter((_, i) => i !== index);
+    setParticipants(newParticipants);
   };
 
-  // Отправка формы
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Данные мероприятия:", eventData);
-    // Здесь будет логика отправки данных на сервер
-    alert("Мероприятие успешно создано!");
+
+    const data = new FormData();
+    data.append("title", form.title);
+    data.append("description", form.description);
+    data.append("budget", form.budget);
+    data.append("deadline", form.deadline);
+
+    // Передаём участников в виде JSON строки
+    data.append("participants", JSON.stringify(participants));
+
+    if (coverImage) data.append("coverImage", coverImage);
+
+    const res = await fetch("/api/events/create", {
+      method: "POST",
+      body: data,
+    });
+
+    if (res.ok) {
+      alert("Мероприятие создано!");
+      // Очистка формы (по желанию)
+      setForm({ title: "", description: "", budget: "", deadline: "" });
+      setParticipants([{ name: "", email: "", role: "" }]);
+      setCoverImage(null);
+    } else {
+      alert("Ошибка!");
+    }
   };
 
   return (
-    <>
-      <Header />
-      <div className={styles.container}>
-        <h1 className={styles.title}>Создание нового мероприятия</h1>
+    <form onSubmit={handleSubmit}>
+      <input
+        name="title"
+        placeholder="Название"
+        value={form.title}
+        onChange={handleChange}
+      />
+      <textarea
+        name="description"
+        placeholder="Описание"
+        value={form.description}
+        onChange={handleChange}
+      />
+      <input
+        name="budget"
+        type="number"
+        placeholder="Бюджет"
+        value={form.budget}
+        onChange={handleChange}
+      />
+      <input
+        name="deadline"
+        type="date"
+        value={form.deadline}
+        onChange={handleChange}
+      />
 
-        <form onSubmit={handleSubmit} className={styles.eventForm}>
-          {/* Блок основной информации */}
-          <div className={styles.formSection}>
-            <h2 className={styles.sectionTitle}>Основная информация</h2>
+      <h3>Участники</h3>
+      {participants.map((participant, index) => (
+        <div key={index} style={{ marginBottom: "10px" }}>
+          <input
+            name="name"
+            placeholder="Имя"
+            value={participant.name}
+            onChange={(e) => handleParticipantChange(index, e)}
+            required
+          />
+          <input
+            name="email"
+            type="email"
+            placeholder="Email"
+            value={participant.email}
+            onChange={(e) => handleParticipantChange(index, e)}
+            required
+          />
+          <input
+            name="role"
+            placeholder="Роль"
+            value={participant.role}
+            onChange={(e) => handleParticipantChange(index, e)}
+            required
+          />
+          <button type="button" onClick={() => removeParticipant(index)}>
+            Удалить
+          </button>
+        </div>
+      ))}
+      <button type="button" onClick={addParticipant}>
+        Добавить участника
+      </button>
 
-            <div className={styles.formGroup}>
-              <label className={styles.formLabel}>Название мероприятия</label>
-              <input
-                type="text"
-                name="title"
-                value={eventData.title}
-                onChange={handleInputChange}
-                className={styles.formInput}
-                required
-              />
-            </div>
-
-            <div className={styles.formGroup}>
-              <label className={styles.formLabel}>Описание</label>
-              <textarea
-                name="description"
-                value={eventData.description}
-                onChange={handleInputChange}
-                rows={5}
-                className={styles.formTextarea}
-                required
-              />
-            </div>
-
-            <div className={styles.formGroup}>
-              <label className={styles.formLabel}>Обложка мероприятия</label>
-              <div className={styles.imageUpload}>
-                {eventData.coverImage ? (
-                  <div className={styles.imagePreview}>
-                    <img
-                      src={eventData.coverImage}
-                      alt="Предпросмотр обложки"
-                      className={styles.imagePreviewImg}
-                    />
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setEventData((prev) => ({ ...prev, coverImage: null }))
-                      }
-                      className={styles.imagePreviewButton}
-                    >
-                      Удалить
-                    </button>
-                  </div>
-                ) : (
-                  <label className={styles.uploadButton}>
-                    Выберите файл
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageUpload}
-                      hidden
-                    />
-                  </label>
-                )}
-              </div>
-            </div>
-
-            <div className={styles.formRow}>
-              <div className={`${styles.formGroup} ${styles.formRowGroup}`}>
-                <label className={styles.formLabel}>Бюджет (руб.)</label>
-                <input
-                  type="number"
-                  name="budget"
-                  value={eventData.budget}
-                  onChange={handleInputChange}
-                  className={styles.formInput}
-                  min="0"
-                />
-              </div>
-
-              <div className={`${styles.formGroup} ${styles.formRowGroup}`}>
-                <label className={styles.formLabel}>Дедлайн</label>
-                <input
-                  type="datetime-local"
-                  name="deadline"
-                  value={eventData.deadline}
-                  onChange={handleInputChange}
-                  className={styles.formInput}
-                  required
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Блок участников */}
-          <div className={`${styles.formSection} ${styles.formSectionLast}`}>
-            <h2 className={styles.sectionTitle}>Участники</h2>
-
-            {eventData.participants.length > 0 && (
-              <div className={styles.participantsList}>
-                {eventData.participants.map((participant, index) => (
-                  <div key={index} className={styles.participantCard}>
-                    <div>
-                      <strong>{participant.name}</strong>
-                      <p className={styles.participantText}>
-                        {participant.email}
-                      </p>
-                      <p className={styles.participantText}>
-                        Роль:{" "}
-                        {participant.role === "organizer"
-                          ? "Организатор"
-                          : "Заказчик"}
-                        {participant.subRole && ` (${participant.subRole})`}
-                        {participant.customRole &&
-                          ` (${participant.customRole})`}
-                      </p>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => removeParticipant(index)}
-                      className={styles.removeButton}
-                    >
-                      Удалить
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {showParticipantForm ? (
-              <div className={styles.participantForm}>
-                <h3 className={styles.subSectionTitle}>Добавить участника</h3>
-
-                <div className={styles.formGroup}>
-                  <label className={styles.formLabel}>Имя</label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={newParticipant.name}
-                    onChange={handleParticipantChange}
-                    className={styles.formInput}
-                    required
-                  />
-                </div>
-
-                <div className={styles.formGroup}>
-                  <label className={styles.formLabel}>Email</label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={newParticipant.email}
-                    onChange={handleParticipantChange}
-                    className={styles.formInput}
-                    required
-                  />
-                </div>
-
-                <div className={styles.formGroup}>
-                  <label className={styles.formLabel}>Роль</label>
-                  <select
-                    name="role"
-                    value={newParticipant.role}
-                    onChange={handleParticipantChange}
-                    className={styles.formInput}
-                  >
-                    <option value="organizer">Организатор</option>
-                    <option value="customer">Заказчик</option>
-                  </select>
-                </div>
-
-                {newParticipant.role === "organizer" && (
-                  <>
-                    <div className={styles.formGroup}>
-                      <label className={styles.formLabel}>
-                        Подроль организатора
-                      </label>
-                      <select
-                        name="subRole"
-                        value={newParticipant.subRole}
-                        onChange={handleParticipantChange}
-                        className={styles.formInput}
-                      >
-                        <option value="">Выберите подроль</option>
-                        <option value="catering">Кейтеринг</option>
-                        <option value="music">Музыка</option>
-                        <option value="venue">Аренда зала</option>
-                        <option value="custom">Другая роль</option>
-                      </select>
-                    </div>
-
-                    {newParticipant.subRole === "custom" && (
-                      <div className={styles.formGroup}>
-                        <label className={styles.formLabel}>Укажите роль</label>
-                        <input
-                          type="text"
-                          name="customRole"
-                          value={newParticipant.customRole}
-                          onChange={handleParticipantChange}
-                          className={styles.formInput}
-                        />
-                      </div>
-                    )}
-                  </>
-                )}
-
-                <div className={styles.formActions}>
-                  <button
-                    type="button"
-                    onClick={addParticipant}
-                    className={styles.addButton}
-                  >
-                    Добавить
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setShowParticipantForm(false)}
-                    className={styles.cancelButton}
-                  >
-                    Отмена
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <button
-                type="button"
-                onClick={() => setShowParticipantForm(true)}
-                className={styles.addParticipantButton}
-              >
-                + Добавить участника
-              </button>
-            )}
-          </div>
-
-          <div className={styles.submitSection}>
-            <button type="submit" className={styles.submitButton}>
-              Создать мероприятие
-            </button>
-          </div>
-        </form>
-      </div>
-      <Footer />
-    </>
+      <input
+        type="file"
+        accept="image/*"
+        onChange={(e) => setCoverImage(e.target.files[0])}
+      />
+      <button type="submit">Создать</button>
+    </form>
   );
 }
