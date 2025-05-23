@@ -24,6 +24,11 @@ export default function EventPageWrapper({ params }) {
 
   useEffect(() => {
     getEvent(id).then(setEvent).catch(console.error);
+
+    fetch(`/api/tasks-for-event?id=${id}`)
+      .then((res) => res.json())
+      .then(setTasks)
+      .catch(console.error);
   }, [id]);
 
   if (!event) return <p>Загрузка...</p>;
@@ -64,7 +69,7 @@ export default function EventPageWrapper({ params }) {
         </div>
         <div className="container">
           <form
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
               e.preventDefault();
               const title = e.target.title.value;
               const day = e.target.day.value;
@@ -72,11 +77,30 @@ export default function EventPageWrapper({ params }) {
               const duration = parseInt(e.target.duration.value);
               const color = e.target.color.value;
 
-              setTasks((prev) => [
-                ...prev,
-                { title, day, startHour, duration, color },
-              ]);
-              e.target.reset();
+              const newTask = {
+                title,
+                day,
+                startHour,
+                duration,
+                color,
+                eventId: id,
+              };
+
+              try {
+                const res = await fetch("/api/tasks", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(newTask),
+                });
+
+                if (!res.ok) throw new Error("Не удалось создать задачу");
+
+                const savedTask = await res.json();
+                setTasks((prev) => [...prev, savedTask]);
+                e.target.reset();
+              } catch (error) {
+                console.error("Ошибка при добавлении задачи:", error);
+              }
             }}
             style={{
               marginBottom: "30px",

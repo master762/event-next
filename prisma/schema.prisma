@@ -83,6 +83,7 @@ model Event {
   createdAt    DateTime      @default(now())
   User         User?         @relation(fields: [userId], references: [id])
   userId       String?
+  Task         Task[]
 }
 
 model Participant {
@@ -95,4 +96,16 @@ model Participant {
   eventId Int
   User    User?   @relation(fields: [userId], references: [id])
   userId  String?
+}
+
+model Task {
+  id        Int      @id @default(autoincrement())
+  title     String
+  day       String
+  startHour Int
+  duration  Int
+  color     String
+  event     Event    @relation(fields: [eventId], references: [id])
+  eventId   Int
+  createdAt DateTime @default(now())
 }
