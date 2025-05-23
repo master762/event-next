@@ -163,7 +163,6 @@ export default function Header() {
             </button>
           ) : (
             <>
-              {" "}
               <Link href="/login" data-aos="fade-left" data-aos-delay="450">
                 <button className={styles.filled}>Регистрация</button>
               </Link>

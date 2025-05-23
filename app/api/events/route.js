@@ -8,17 +8,41 @@ const prisma = new PrismaClient();
 // POST: создать мероприятие
 export async function POST(req) {
   try {
+    const session = await getServerSession(authOptions);
+
+    if (!session || !session.user?.id) {
+      return NextResponse.json(
+        { error: "Неавторизованный доступ" },
+        { status: 401 }
+      );
+    }
+
     const body = await req.json();
 
-    // Привязать userId участникам, если email найден в базе
-    const participantsData = await Promise.all(
+    const creatorId = session.user.id;
+    const creatorEmail = session.user.email;
+    const creatorName = session.user.name;
+
+    // Участник-организатор (создатель мероприятия)
+    const participantsData = [
+      {
+        name: creatorName || "",
+        email: creatorEmail,
+        role: "организатор",
+        subRole: null,
+        userId: creatorId,
+      },
+    ];
+
+    // Добавляем остальных участников
+    const otherParticipants = await Promise.all(
       body.participants.map(async (participant) => {
         const existingUser = await prisma.user.findUnique({
           where: { email: participant.email },
         });
 
         return {
-          name: participant.name,
+          name: existingUser?.name || "",
           email: participant.email,
           role: participant.role,
           subRole: participant.subRole || null,
@@ -26,6 +50,8 @@ export async function POST(req) {
         };
       })
     );
+
+    participantsData.push(...otherParticipants);
 
     const event = await prisma.event.create({
       data: {
@@ -64,7 +90,6 @@ export async function GET(req) {
 
     const userId = session.user.id;
 
-    // Найти мероприятия, где пользователь участвует
     const events = await prisma.event.findMany({
       where: {
         participants: {

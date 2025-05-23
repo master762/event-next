@@ -1,5 +1,5 @@
 "use client";
-
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import styles from "@/styles/events.module.css";
 
@@ -34,11 +34,13 @@ export default function Events() {
                   src={event.coverImage || "/img/default-event.png"}
                   alt={`Событие: ${event.title}`}
                 />
-                <h3>{event.title}</h3>
+                <h2>{event.title}</h2>
                 <p>{event.description}</p>
-                <button className={styles.btn}>
-                  <span>Увидеть подробности</span>
-                </button>
+                <Link href={`/events/${event.id}`}>
+                  <button className={styles.btn}>
+                    <span>Увидеть подробности</span>
+                  </button>
+                </Link>
                 <button className={styles.btn}>
                   <span>Удалить</span>
                 </button>
