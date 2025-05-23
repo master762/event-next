@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, use } from "react";
 import styles from "@/styles/event.module.css";
+import EventTaskTable from "@/components/TaskTable";
 
 async function getEvent(id) {
   const res = await fetch(`http://localhost:3000/api/events/${id}`, {
@@ -18,7 +19,7 @@ function formatTime(hour) {
 }
 
 export default function EventPageWrapper({ params }) {
-  const { id } = use(params); // 🔥 ключевой момент
+  const { id } = use(params);
   const [event, setEvent] = useState(null);
   const [tasks, setTasks] = useState([]);
 
@@ -59,8 +60,6 @@ export default function EventPageWrapper({ params }) {
           </div>
         </div>
       </section>
-
-      {/* форма добавления задач */}
 
       {/* таймлайн */}
       <section>
@@ -174,6 +173,14 @@ export default function EventPageWrapper({ params }) {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+      <section>
+        <div className={styles.title}>
+          <h2>Общие задачи</h2>
+        </div>
+        <div className="container">
+          <EventTaskTable eventId={id} />
         </div>
       </section>
     </>

@@ -1,45 +1,164 @@
 "use client";
+import { useEffect, useState } from "react";
 import styles from "@/styles/TaskTable.module.css";
-import { useState } from "react";
 
-const initialTasks = [
-  {
-    id: 1,
-    name: "Задача 1",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    status: "активна",
-    expenses: 7000,
-    allocated: -5070,
-  },
-  {
-    id: 2,
-    name: "Задача 2",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    status: "выполнено",
-    expenses: 2000,
-    allocated: 1800,
-  },
-];
-
-export default function TaskTable() {
-  const [tasks, setTasks] = useState(initialTasks);
+export default function EventTaskTable({ eventId }) {
+  const [tasks, setTasks] = useState([]);
   const [selected, setSelected] = useState([]);
+  const [form, setForm] = useState({
+    title: "",
+    description: "",
+    expenses: "",
+  });
+  const [filters, setFilters] = useState({
+    title: "",
+    description: "",
+    status: "",
+    expenses: "",
+  });
+
+  useEffect(() => {
+    fetch(`/api/event-task?eventId=${eventId}`)
+      .then((res) => res.json())
+      .then((data) => setTasks(data));
+  }, [eventId]);
 
   const toggleSelect = (id) => {
     setSelected((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
     );
   };
+
+  const handleAddTask = async () => {
+    const res = await fetch("/api/event-task", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...form,
+        status: "активна",
+        eventId: Number(eventId),
+      }),
+    });
+    const newTask = await res.json();
+    setTasks((prev) => [...prev, newTask]);
+    setForm({ title: "", description: "", expenses: "" });
+  };
+
+  const handleDeleteSelected = async () => {
+    await Promise.all(
+      selected.map((id) =>
+        fetch(`/api/event-task?id=${id}`, { method: "DELETE" })
+      )
+    );
+    setTasks((prev) => prev.filter((task) => !selected.includes(task.id)));
+    setSelected([]);
+  };
+
+  const handleMarkCompleted = async () => {
+    await Promise.all(
+      selected.map((id) =>
+        fetch("/api/event-task", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id, status: "выполнено" }),
+        })
+      )
+    );
+    setTasks((prev) =>
+      prev.map((task) =>
+        selected.includes(task.id) ? { ...task, status: "выполнено" } : task
+      )
+    );
+    setSelected([]);
+  };
+
+  const filteredTasks = tasks.filter((task) => {
+    return (
+      task.title.toLowerCase().includes(filters.title.toLowerCase()) &&
+      task.description
+        .toLowerCase()
+        .includes(filters.description.toLowerCase()) &&
+      (filters.status ? task.status === filters.status : true) &&
+      (filters.expenses ? task.expenses <= Number(filters.expenses) : true)
+    );
+  });
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
         <span>Выбрано: {selected.length}</span>
         {selected.length > 0 && (
-          <button className={styles.deleteBtn}>🗑️</button>
+          <div>
+            <button
+              className={styles.completeBtn}
+              onClick={handleMarkCompleted}
+            >
+              ✅ Выполнено
+            </button>
+            <button className={styles.deleteBtn} onClick={handleDeleteSelected}>
+              🗑️ Удалить
+            </button>
+          </div>
         )}
-        <button className={styles.addBtn}>+ Добавить задачу</button>
       </div>
+
+      <div className={styles.form}>
+        <input
+          type="text"
+          placeholder="Название"
+          value={form.title}
+          onChange={(e) => setForm({ ...form, title: e.target.value })}
+        />
+        <input
+          type="text"
+          placeholder="Описание"
+          value={form.description}
+          onChange={(e) => setForm({ ...form, description: e.target.value })}
+        />
+        <input
+          type="number"
+          placeholder="Расходы"
+          value={form.expenses}
+          onChange={(e) =>
+            setForm({ ...form, expenses: Number(e.target.value) })
+          }
+        />
+        <button className={styles.addBtn} onClick={handleAddTask}>
+          + Добавить
+        </button>
+      </div>
+
+      <div className={styles.filters}>
+        <input
+          type="text"
+          placeholder="Фильтр по названию"
+          value={filters.title}
+          onChange={(e) => setFilters({ ...filters, title: e.target.value })}
+        />
+        <input
+          type="text"
+          placeholder="Фильтр по описанию"
+          value={filters.description}
+          onChange={(e) =>
+            setFilters({ ...filters, description: e.target.value })
+          }
+        />
+        <select
+          value={filters.status}
+          onChange={(e) => setFilters({ ...filters, status: e.target.value })}
+        >
+          <option value="">Все статусы</option>
+          <option value="активна">Активна</option>
+          <option value="выполнено">Выполнено</option>
+        </select>
+        <input
+          type="number"
+          placeholder="Макс. расходы"
+          value={filters.expenses}
+          onChange={(e) => setFilters({ ...filters, expenses: e.target.value })}
+        />
+      </div>
+
       <table className={styles.table}>
         <thead>
           <tr>
@@ -48,21 +167,20 @@ export default function TaskTable() {
             <th>Описание</th>
             <th>Статус</th>
             <th>Расходы</th>
-            <th>Выделено</th>
           </tr>
         </thead>
         <tbody>
-          {tasks.map((task, index) => (
+          {filteredTasks.map((task, index) => (
             <tr key={task.id}>
               <td>
                 <input
                   type="checkbox"
                   checked={selected.includes(task.id)}
                   onChange={() => toggleSelect(task.id)}
-                />
-                {task.id}
+                />{" "}
+                {index + 1}
               </td>
-              <td>{task.name}</td>
+              <td>{task.title}</td>
               <td className={styles.description}>{task.description}</td>
               <td>
                 <span
@@ -74,14 +192,10 @@ export default function TaskTable() {
                 </span>
               </td>
               <td>{task.expenses}₽</td>
-              <td style={{ color: task.allocated < 0 ? "red" : "green" }}>
-                {task.allocated}₽
-              </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <div className={styles.pagination}>1–3</div>
     </div>
   );
 }

@@ -84,6 +84,7 @@ model Event {
   User         User?         @relation(fields: [userId], references: [id])
   userId       String?
   Task         Task[]
+  EventTask    EventTask[]
 }
 
 model Participant {
@@ -108,4 +109,15 @@ model Task {
   event     Event    @relation(fields: [eventId], references: [id])
   eventId   Int
   createdAt DateTime @default(now())
+}
+
+model EventTask {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  status      String // "активна" или "выполнено"
+  expenses    Float
+  createdAt   DateTime @default(now())
+  event       Event    @relation(fields: [eventId], references: [id])
+  eventId     Int
 }

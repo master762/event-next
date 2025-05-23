@@ -1,9 +1,5 @@
 "use client";
-import Header from "@/components/Header";
-import React from "react";
-import Footer from "@/components/Footer";
 import styles from "@/styles/event.module.css";
-import { FaUser, FaDesktop, FaBuilding, FaUtensils } from "react-icons/fa";
 import {
   LineChart,
   Line,
@@ -14,13 +10,7 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
-import TaskTable from "@/components/TaskTable";
-const paymentData = [
-  { icon: <FaUser />, label: "Поставщики", value: 3241, max: 10000 },
-  { icon: <FaDesktop />, label: "Устройства и ПО", value: 241, max: 250 },
-  { icon: <FaBuilding />, label: "Аренда помещения", value: 1541, max: 52000 },
-  { icon: <FaUtensils />, label: "Еда", value: 141, max: 1000 },
-];
+
 const data = [
   { name: "Янв", value: 32000 },
   { name: "Фев", value: 67000 },
@@ -36,43 +26,8 @@ const data = [
   { name: "Дек", value: 33000 },
 ];
 export default function page() {
-  const days = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
-  const hours = Array.from({ length: 13 }, (_, i) => 7 + i);
-
-  const formatTime = (h) => `${String(h).padStart(2, "0")}:00`;
   return (
     <>
-      <Header />
-      <nav className={styles.navigate}>
-        <ul>
-          <li>
-            <img src="/img/info.svg" alt="" />
-            <p>Обшая информация</p>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <img src="/img/team.svg" alt="" />
-            <p>Участники</p>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <img src="/img/task.svg" alt="" />
-            <p>Задачи</p>
-          </li>
-        </ul>
-      </nav>
-
-      {/* задачи, таблица */}
-      <section>
-        <div className={styles.title}>
-          <h2>Общие задачи</h2>
-        </div>
-        <div className="container">
-          <TaskTable />
-        </div>
-      </section>
       {/* финансовый модуль */}
       <section>
         <div className={styles.title}>
@@ -134,89 +89,9 @@ export default function page() {
                 </ResponsiveContainer>
               </div>
             </div>
-            <div className={styles.payment}>
-              <p>Платежи</p>
-              <div className={styles.paymentList}>
-                {paymentData.map(({ icon, label, value, max }, index) => (
-                  <div key={index} className={styles.paymentItem}>
-                    <div className={styles.icon}>{icon}</div>
-                    <div className={styles.info}>
-                      <div className={styles.label}>{label}</div>
-                      <div className={styles.amount}>
-                        {value.toLocaleString("ru-RU")}₽/
-                        <span>{max.toLocaleString("ru-RU")}₽</span>
-                      </div>
-                      <div className={styles.progress}>
-                        <div
-                          className={styles.bar}
-                          style={{ width: `${(value / max) * 100}%` }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className={styles.credit}>
-              <div className={styles.cardTitle}>
-                <p>Карта</p>
-                <button>
-                  <span>+</span>
-                </button>
-              </div>
-              <div className={styles.creditCard}>
-                <div className={styles.cardHeader}>
-                  <p>3475 7381 3759 ****</p>
-                </div>
-                <div className={styles.cardBody}>
-                  <div>
-                    <p>Баланс</p>
-                    <p>3,215,352 USD</p>
-                  </div>
-                  <div>
-                    <p>Дата выдачи</p>
-                    <p>04 / 24</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className={styles.transactions}>
-              <p className={styles.transactionsTitle}>Недавние транзакции</p>
-              <div className={styles.transaction}>
-                <img src="/img/Avatar.png" alt="" />
-                <div className={styles.description}>
-                  <div>
-                    <p className={styles.name}>Кейтеринг</p>
-                    <p className={styles.name}>Анна </p>
-                  </div>
-                  <p className={styles.price}>-10.208₽</p>
-                </div>
-              </div>
-              <div className={styles.transaction}>
-                <img src="/img/Avatar2.png" alt="" />
-                <div className={styles.description}>
-                  <div>
-                    <p className={styles.role}>Арендадатель</p>
-                    <p className={styles.name}>Влад </p>
-                  </div>
-                  <p className={styles.price}>-24.465₽</p>
-                </div>
-              </div>
-              <div className={styles.transaction}>
-                <img src="/img/Avatar3.png" alt="" />
-                <div className={styles.description}>
-                  <div>
-                    <p className={styles.role}>Музыкант</p>
-                    <p className={styles.name}>Александр </p>
-                  </div>
-                  <p className={styles.price}>-5.000₽</p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
-      <Footer />
     </>
   );
 }
