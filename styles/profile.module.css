@@ -289,3 +289,148 @@
 .cancelButton:hover {
   background-color: #e1e1e1;
 }
+/* Для планшетов и небольших экранов */
+@media (max-width: 1024px) {
+  .flex {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .mainProfile,
+  .infoProfile {
+    max-width: 100%;
+    width: 100%;
+    min-height: auto;
+  }
+
+  .container {
+    max-width: 100%;
+    margin-top: 10%;
+    padding: 0 20px;
+  }
+
+  .bottom {
+    flex-direction: column;
+    margin-top: 60px;
+    margin-bottom: 40px;
+  }
+
+  .desc {
+    max-width: 100%;
+    min-height: auto;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+  }
+
+  .titleDesc,
+  .bodyDesc {
+    font-size: 24px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
+/* Для небольших планшетов и больших телефонов */
+@media (max-width: 768px) {
+  .flex {
+    gap: 30px;
+  }
+
+  .name p {
+    font-size: 24px;
+  }
+
+  .avatarContainer {
+    width: 180px;
+    height: 210px;
+    margin: 20px auto;
+  }
+
+  .container {
+    margin-top: 8%;
+    padding: 0 15px;
+  }
+
+  .info {
+    height: 45px;
+    margin-bottom: 12px;
+  }
+
+  .info p,
+  .info span {
+    font-size: 16px;
+  }
+
+  .bottom {
+    margin-top: 50px;
+    margin-bottom: 30px;
+  }
+
+  .titleDesc,
+  .bodyDesc {
+    font-size: 22px;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+}
+
+/* Для телефонов */
+@media (max-width: 480px) {
+  .buttonScroll {
+    top: 70px;
+    left: 5px;
+    width: 35px;
+    height: 35px;
+  }
+
+  .title {
+    font-size: 22px;
+    padding-top: 30px;
+    margin-bottom: 40px;
+  }
+
+  .name p {
+    font-size: 20px;
+  }
+
+  .avatarContainer {
+    width: 140px;
+    height: 165px;
+    margin: 15px auto;
+  }
+
+  .container {
+    max-width: 100%;
+    margin-top: 6%;
+    padding: 0 10px;
+  }
+
+  .info {
+    height: 40px;
+    margin-bottom: 10px;
+  }
+
+  .info p,
+  .info span {
+    font-size: 14px;
+  }
+
+  .bottom {
+    flex-direction: column;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+
+  .desc {
+    max-width: 100%;
+    min-height: auto;
+    border-radius: 15px;
+  }
+
+  .titleDesc,
+  .bodyDesc {
+    font-size: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}

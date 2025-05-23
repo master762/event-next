@@ -98,3 +98,104 @@
   border-radius: 50%;
   background-color: #703bf7;
 }
+@media (max-width: 1024px) {
+  .cards {
+    gap: 16px;
+    margin-bottom: 80px;
+  }
+
+  .card {
+    max-width: 360px;
+    padding: 20px;
+    min-height: 420px;
+  }
+
+  .TeamTitle {
+    font-size: 40px;
+  }
+
+  .inputWrapper {
+    max-width: 320px;
+  }
+
+  .input {
+    max-width: 240px;
+  }
+}
+
+@media (max-width: 768px) {
+  .TeamTitle {
+    font-size: 32px;
+    margin-bottom: 40px;
+  }
+
+  .cards {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .card {
+    width: 90%;
+    margin-top: 20px;
+  }
+
+  .inputWrapper {
+    max-width: 300px;
+    min-height: 50px;
+  }
+
+  .input {
+    max-width: 220px;
+    padding: 8px 16px;
+  }
+
+  .image a {
+    width: 60px;
+    height: 60px;
+    top: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .TeamTitle {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+
+  .card {
+    padding: 16px;
+    min-height: 400px;
+  }
+
+  .cardText h3 {
+    font-size: 18px;
+  }
+
+  .cardText p {
+    font-size: 14px;
+  }
+
+  .inputWrapper {
+    flex-direction: row;
+    max-width: 100%;
+    min-height: 48px;
+    padding-right: 8px;
+  }
+
+  .input {
+    max-width: 200px;
+    font-size: 14px;
+  }
+
+  .inputWrapper button {
+    width: 32px;
+    height: 32px;
+  }
+
+  .image a {
+    width: 50px;
+    height: 50px;
+    top: 150px;
+  }
+}

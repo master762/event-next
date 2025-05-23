@@ -197,3 +197,183 @@
   font-size: 18px;
   color: #666;
 }
+/* До 1024px */
+@media (max-width: 1024px) {
+  .filter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  .nav {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .nav ul li {
+    font-size: 18px;
+    margin-right: 15px;
+  }
+
+  .filter button {
+    width: 220px;
+    height: 50px;
+    font-size: 16px;
+  }
+
+  .cards {
+    gap: 30px;
+    justify-content: center;
+  }
+
+  .card {
+    max-width: 350px;
+    min-height: 200px;
+  }
+
+  .text h3 {
+    font-size: 18px;
+  }
+
+  .text p {
+    font-size: 13px;
+  }
+
+  .text p:nth-child(3) {
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+
+  .text button {
+    height: 42px;
+    width: 110px;
+  }
+}
+
+/* До 768px */
+@media (max-width: 768px) {
+  .filter {
+    gap: 15px;
+  }
+
+  .nav ul li {
+    font-size: 16px;
+    margin-right: 12px;
+  }
+
+  .filter button {
+    width: 180px;
+    height: 45px;
+    font-size: 14px;
+  }
+
+  .cards {
+    gap: 20px;
+  }
+
+  .card {
+    max-width: 300px;
+    min-height: 180px;
+    grid-template-columns: 1fr; /* Переключаем на один столбец */
+  }
+
+  .image {
+    height: 150px;
+  }
+
+  .text {
+    padding: 15px 20px 8px 13px;
+  }
+
+  .text h3 {
+    font-size: 16px;
+  }
+
+  .text p {
+    font-size: 12px;
+  }
+
+  .text button {
+    height: 38px;
+    width: 100px;
+  }
+}
+
+/* До 480px */
+@media (max-width: 480px) {
+  .filter {
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 30px;
+  }
+
+  .nav {
+    width: 100%;
+  }
+
+  .nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .nav ul li {
+    font-size: 14px;
+    margin-right: 10px;
+    white-space: normal;
+  }
+
+  .filter button {
+    width: 100%;
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .search {
+    width: 100%;
+    padding: 8px 20px;
+    height: 36px;
+  }
+
+  .cards {
+    gap: 15px;
+    justify-content: center;
+  }
+
+  .card {
+    max-width: 100%;
+    grid-template-columns: 1fr;
+    min-height: 150px;
+  }
+
+  .image {
+    height: 120px;
+  }
+
+  .text {
+    padding: 12px 15px 8px 10px;
+  }
+
+  .text h3 {
+    font-size: 14px;
+    white-space: normal;
+  }
+
+  .text p {
+    font-size: 11px;
+  }
+
+  .text button {
+    height: 36px;
+    width: 90px;
+    font-size: 12px;
+  }
+
+  .delete,
+  .add {
+    width: 28px;
+    height: 28px;
+    font-size: 22px;
+  }
+}

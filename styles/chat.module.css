@@ -48,7 +48,11 @@
   border: 2px solid rgba(0, 0, 0, 0.5);
   border-radius: 50%;
 }
-
+.avatar img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
 .text h3,
 .text p {
   font-size: 16px;
@@ -166,14 +170,6 @@
   padding-right: 50px;
 }
 
-.messageTime {
-  position: absolute;
-  right: 0;
-  top: 0;
-  color: rgba(0, 0, 0, 0.5);
-  font-size: 12px;
-}
-
 .messagerContaier {
   overflow-y: auto;
   margin-bottom: 30px;
@@ -260,8 +256,10 @@
 .time {
   position: absolute;
   bottom: -20px;
-  right: 10px;
+  right: 0;
   color: rgba(0, 0, 0, 0.8);
   font-weight: 400;
   font-size: 12px;
+  width: fit-content;
+  white-space: nowrap;
 }

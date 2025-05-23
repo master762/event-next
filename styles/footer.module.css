@@ -1,3 +1,4 @@
+/* Базовые стили (ваши оригинальные стили) */
 .footer {
   background-color: #1e1e1e;
   color: #fff;
@@ -28,7 +29,6 @@
 .column li a:hover {
   color: #aaa;
 }
-
 .bottomFooter {
   margin-top: 60px;
   font-size: 14px;
@@ -55,4 +55,78 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* ----------- Адаптация ----------- */
+
+/* До 1024px (планшеты и небольшие экраны) */
+@media (max-width: 1024px) {
+  .container {
+    max-width: 960px;
+    padding: 40px 15px 30px;
+  }
+  .bottomFooter {
+    padding: 0 80px;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    min-height: auto;
+  }
+  .icons {
+    max-width: 200px;
+  }
+}
+
+/* До 768px (планшеты в портретной ориентации и большие телефоны) */
+@media (max-width: 768px) {
+  .container {
+    max-width: 720px;
+    padding: 30px 10px 20px;
+  }
+  .grid {
+    gap: 25px;
+  }
+  .bottomFooter {
+    padding: 0 40px;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    font-size: 13px;
+  }
+  .icons {
+    max-width: 180px;
+    justify-content: center;
+    gap: 15px;
+  }
+}
+
+/* До 480px (мобильные телефоны) */
+@media (max-width: 480px) {
+  .container {
+    max-width: 100%;
+    padding: 20px 10px 15px;
+  }
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+  }
+  .column li {
+    font-size: 13px;
+  }
+  .bottomFooter {
+    padding: 0 20px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: 12px;
+    gap: 10px;
+  }
+  .icons {
+    max-width: 140px;
+    gap: 10px;
+  }
+  .icons div {
+    width: 40px;
+    height: 40px;
+  }
 }

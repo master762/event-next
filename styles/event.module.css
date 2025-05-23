@@ -477,3 +477,209 @@
   margin-top: 16px;
   text-align: center;
 }
+/* Адаптация для планшетов (до 1024px) */
+@media (max-width: 1024px) {
+  .background {
+    min-height: 700px;
+  }
+  .text {
+    max-width: 600px;
+    margin-bottom: 15px;
+  }
+  .text h3 {
+    font-size: 30px;
+  }
+  .text p {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  .text button {
+    width: 180px;
+    height: 48px;
+    font-size: 16px;
+  }
+  .title {
+    max-width: 700px;
+    font-size: 28px;
+    min-height: 70px;
+  }
+  .scheduleWrapper {
+    padding: 15px;
+  }
+  .dataTable {
+    grid-template-columns: 50px repeat(7, 1fr);
+    grid-auto-rows: 50px;
+  }
+  .financeBacground {
+    padding: 80px 40px;
+    min-height: 850px;
+  }
+  .financeContainer {
+    gap: 30px;
+  }
+  .balance,
+  .expenses {
+    min-height: 80px;
+    padding: 15px;
+  }
+  .graph {
+    height: calc(100vh - 300px);
+    padding: 15px;
+  }
+  .deadline {
+    font-size: 18px;
+    padding: 0 30px 0 15px;
+  }
+  .container {
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 20px;
+  }
+  .heading {
+    font-size: 20px;
+  }
+}
+
+/* Адаптация для планшетов/мобильных (до 768px) */
+@media (max-width: 768px) {
+  .background {
+    min-height: 600px;
+    padding: 10px;
+  }
+  .text {
+    max-width: 100%;
+    padding: 0 20px;
+    margin-bottom: 10px;
+  }
+  .text h3 {
+    font-size: 26px;
+  }
+  .text p {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+  .text button {
+    width: 160px;
+    height: 44px;
+    font-size: 14px;
+  }
+  .title {
+    max-width: 100%;
+    font-size: 24px;
+    min-height: 60px;
+    padding: 0 10px;
+  }
+  .scheduleWrapper {
+    padding: 10px;
+    flex-direction: column;
+  }
+  .dataTable {
+    grid-template-columns: 40px repeat(7, 1fr);
+    grid-auto-rows: 40px;
+    gap: 3px;
+  }
+  .financeBacground {
+    padding: 60px 30px;
+    min-height: 700px;
+  }
+  .financeContainer {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .balance,
+  .expenses {
+    min-height: 70px;
+    padding: 12px;
+  }
+  .graph {
+    height: calc(100vh - 250px);
+    padding: 10px;
+  }
+  .deadline {
+    font-size: 16px;
+    padding: 0 20px 0 10px;
+  }
+  .container {
+    max-width: 90%;
+    margin: 20px auto;
+    padding: 15px;
+  }
+  .heading {
+    font-size: 18px;
+  }
+}
+
+/* Адаптация для мобильных (до 480px) */
+@media (max-width: 480px) {
+  .background {
+    min-height: 500px;
+    padding: 5px;
+    align-items: center;
+  }
+  .text {
+    max-width: 100%;
+    padding: 0 10px;
+    margin-bottom: 8px;
+  }
+  .text h3 {
+    font-size: 20px;
+  }
+  .text p {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+  .text button {
+    width: 140px;
+    height: 40px;
+    font-size: 12px;
+  }
+  .title {
+    font-size: 18px;
+    min-height: 50px;
+    padding: 0 8px;
+  }
+  .scheduleWrapper {
+    flex-direction: column;
+    padding: 5px;
+  }
+  .dataTable {
+    grid-template-columns: 30px repeat(7, 1fr);
+    grid-auto-rows: 30px;
+    gap: 2px;
+  }
+  .financeBacground {
+    padding: 40px 20px;
+    min-height: 600px;
+  }
+  .financeContainer {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .balance,
+  .expenses {
+    min-height: 60px;
+    padding: 10px;
+    font-size: 14px;
+  }
+  .graph {
+    height: calc(100vh - 200px);
+    padding: 8px;
+  }
+  .deadline {
+    font-size: 14px;
+    padding: 0 15px 0 8px;
+  }
+  .container {
+    max-width: 100%;
+    margin: 10px auto;
+    padding: 10px;
+  }
+  .heading {
+    font-size: 16px;
+  }
+  .participantCard {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

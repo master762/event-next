@@ -73,3 +73,59 @@
   line-height: 150%;
   color: #ffffff;
 }
+@media (max-width: 480px) {
+  .title {
+    font-size: 24px;
+    margin-bottom: 40px;
+  }
+
+  .cards {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .card {
+    padding: 20px;
+    min-height: auto;
+  }
+
+  .btn {
+    height: 50px;
+  }
+
+  .btn span {
+    font-size: 16px;
+  }
+
+  .card p {
+    font-size: 16px;
+  }
+
+  .card h2 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cards {
+    gap: 30px;
+  }
+
+  .card {
+    flex: 1 1 100%;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .cards {
+    gap: 30px;
+  }
+
+  .card {
+    flex: 1 1 100%;
+  }
+}
