@@ -20,6 +20,27 @@ export default function Events() {
     loadEvents();
   }, []);
 
+  // Функция удаления мероприятия
+  async function handleDelete(id) {
+    if (!confirm("Вы действительно хотите удалить это мероприятие?")) return;
+
+    try {
+      const res = await fetch(`/api/events/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) {
+        throw new Error("Ошибка при удалении мероприятия");
+      }
+
+      // Обновляем список, убирая удалённое мероприятие
+      setEvents((prevEvents) => prevEvents.filter((event) => event.id !== id));
+    } catch (error) {
+      console.error(error);
+      alert("Не удалось удалить мероприятие.");
+    }
+  }
+
   return (
     <section className={styles.section}>
       <div className={styles.container}>
@@ -41,7 +62,10 @@ export default function Events() {
                     <span>Увидеть подробности</span>
                   </button>
                 </Link>
-                <button className={styles.btn}>
+                <button
+                  className={styles.btn}
+                  onClick={() => handleDelete(event.id)}
+                >
                   <span>Удалить</span>
                 </button>
               </div>
